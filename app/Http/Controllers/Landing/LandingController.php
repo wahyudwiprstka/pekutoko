@@ -74,4 +74,77 @@ class LandingController extends Controller
 
         return view('landing.detail', compact('product', 'categories', 'products', 'whatsappUrl'));
     }
+
+    function addToCart(Request $request, $id): mixed {
+
+        $cart = session()->get('cart', []);
+        $quantity = $request->input('quantity', 1);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += $quantity;
+        } else {
+            $cart[$id] = [
+                "product_id" => $id,
+                "quantity" => $quantity,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('landing.show-cart')->with('success', 'Produk berhasil ditambahkan ke keranjang!');    
+    }
+
+    function showCart(): mixed {
+        $cart = session()->get('cart', []);
+        $categories = Category::all();
+        $products = [];
+        $totalPrice = 0;
+
+        foreach ($cart as $key => $value) {
+            $product = Product::where('id', $value['product_id'])->first();
+            
+            if ($product) { // Check if the product exists
+                $product->quantity = $value['quantity'];
+                $totalPrice += $product->price * $product->quantity;
+                $products[] = $product;
+            }
+        }
+    
+        return view('landing.cart', compact('products', 'categories', 'totalPrice'));
+    }
+
+    function removeCart(): mixed {
+        session()->forget('cart');
+        return redirect()->route('landing.show-cart')->with('success', 'Keranjang berhasil dihapus!');
+    }
+
+    function removeCartProduct($id): mixed {
+        $cart = session()->get('cart', []);
+        unset($cart[$id]);
+        session()->put('cart', $cart);
+        return redirect()->route('landing.show-cart')->with('success', 'Produk berhasil dihapus dari keranjang!');
+    }
+
+    function checkout(): mixed {
+        $cart = session()->get('cart', []);
+        $categories = Category::all();
+        $products = [];
+        $totalPrice = 0;
+
+        foreach ($cart as $key => $value) {
+            $product = Product::where('id', $value['product_id'])->first();
+            
+            if ($product) { // Check if the product exists
+                $product->quantity = $value['quantity'];
+                $totalPrice += $product->price * $product->quantity;
+                $products[] = $product;
+            }
+        }
+
+        return view('landing.checkout', compact('products', 'categories', 'totalPrice'));
+    }
+
+    function processCheckout(Request $request) : mixed {
+        return 'success';
+    }
 }

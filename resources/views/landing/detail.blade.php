@@ -65,7 +65,17 @@ use App\Models\File;
                     <h5>{{ $product->ukm->ukm_name }} UMKM</h5>
                     <div class="product__details__price">{{ 'Rp ' . number_format($product->price, 0, ',', '.') }}</div>
                     <p>{{ $product->description }}</p>
-                    <a href="{{$whatsappUrl}}" class="primary-btn">Hubungi Penjual</a>
+                    <form action="{{ route('landing.add-to-cart', ['id' => $product->id]) }}" method="POST">
+                        @csrf
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="number" name="quantity" value="1" min="1" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="primary-btn">TAMBAH KE KERANJANG</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -17,6 +17,11 @@ Route::get('/category/{id}', [LandingController::class, 'category'])->name('land
 Route::get('/search', [LandingController::class, 'search'])->name('landing.search');
 Route::get('/detail/{id}', [LandingController::class, 'show'])->name('landing.detail');
 Route::get('/umkm/{id?}', [LandingController::class, 'ukm'])->name('landing.umkm');
+Route::get('/checkout', [LandingController::class, 'checkout'])->name('landing.checkout');
+Route::post('/add-to-cart/{id}', [LandingController::class, 'addToCart'])->name('landing.add-to-cart');
+Route::get('/show-cart', [LandingController::class, 'showCart'])->name('landing.show-cart');
+Route::get('/remove-cart', [LandingController::class, 'removeCart'])->name('landing.remove-cart');
+Route::get('/remove-cart/{id}', [LandingController::class, 'removeCartProduct'])->name('landing.remove-cart-product');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');
