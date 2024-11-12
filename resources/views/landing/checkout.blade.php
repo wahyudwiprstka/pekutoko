@@ -72,31 +72,32 @@ use App\Models\File;
           <div class="col-lg-8 col-md-6">
             <div class="checkout__input">
               <p>Nama Lengkap<span>*</span></p>
-              <input type="text" name="full_name" placeholder="Masukkan Nama Lengkap">
+              <input type="text" name="full_name" placeholder="Masukkan Nama Lengkap" required>
             </div>
             <div class="checkout__input">
               <p>Alamat<span>*</span></p>
-              <input type="text" name="address" placeholder="Masukkan Alamat Lengkap" class="checkout__input__add">
+              <input type="text" name="address" placeholder="Masukkan Alamat Lengkap" class="checkout__input__add" required>
             </div>
             <div class="checkout__input">
               <p>Kabupaten<span>*</span></p>
-              <input type="text" name="province" value="Jembrana" readonly>
+              <input type="text" name="regency" value="Jembrana" readonly>
+              <small style="color: red; font-size: 0.9em;">Saat ini Pekutoko hanya melayani pengiriman/order di wilayah kabupaten Jembrana</small>
             </div>
             <div class="checkout__input">
               <p>Kode POS<span>*</span></p>
-              <input type="text" name="postal_code" placeholder="Masukkan Kode POS">
+              <input type="text" name="postal_code" placeholder="Masukkan Kode POS" required>
             </div>
             <div class="row">
               <div class="col-lg-6">
                 <div class="checkout__input">
                   <p>Nomor HP / WA<span>*</span></p>
-                  <input type="text" name="phone_number" placeholder="Masukkan Nomor HP">
+                  <input type="text" name="phone_number" placeholder="Masukkan Nomor HP" required>
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="checkout__input">
                   <p>Email<span>*</span></p>
-                  <input type="text" name="email" placeholder="Masukkan Email">
+                  <input type="text" name="email" placeholder="Masukkan Email" required>
                 </div>
               </div>
             </div>

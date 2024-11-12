@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Ukm;
-
+use App\Models\Order;
+use App\Services\Ipaymu\IpaymuService;
 class LandingController extends Controller
 {
+    function __construct(
+        protected IpaymuService $ipaymuService 
+    ){}
+
     function index(): mixed
     {
         $products = Product::all();
@@ -145,6 +150,80 @@ class LandingController extends Controller
     }
 
     function processCheckout(Request $request) : mixed {
-        return 'success';
+        $cart = session()->get('cart', []);
+        $productName = [];
+        $qty = [];
+        $price = [];
+        $description = [];
+
+        foreach ($cart as $key => $value) {
+            $product = Product::where('id', $value['product_id'])->first();
+        
+            if ($product) {
+                $product->quantity = $value['quantity'];
+                $product->total_price = $product->price * $product->quantity;
+
+                $productName[] = $product->product_name;
+                $qty[] = $product->quantity;
+                $price[] = $product->price;
+                $description[] = '-';
+        
+                $newProductDetail = [
+                    'product_id' => $product->id,
+                    'name' => $product->product_name,
+                    'price' => $product->price,
+                    'quantity' => $product->quantity,
+                    'total_price' => $product->total_price,
+                ];
+    
+                $order = Order::where('id_ukm', $product->id_ukm)->first();
+        
+                if ($order) {
+                    $existingOrderDetails = json_decode($order->order_detail, true);
+    
+                    $existingOrderDetails[] = $newProductDetail;
+        
+                    $order->update([
+                        'full_name' => $request->input('full_name'),
+                        'address' => $request->input('address'),
+                        'regency' => $request->input('regency'),
+                        'postal_code' => $request->input('postal_code'),
+                        'phone_number' => $request->input('phone_number'),
+                        'email' => $request->input('email'),
+                        'notes' => $request->input('notes'),
+                        'order_detail' => json_encode($existingOrderDetails),
+                    ]);
+                } else {
+                    Order::create([
+                        'id_ukm' => $product->id_ukm,
+                        'full_name' => $request->input('full_name'),
+                        'address' => $request->input('address'),
+                        'regency' => $request->input('regency'),
+                        'postal_code' => $request->input('postal_code'),
+                        'phone_number' => $request->input('phone_number'),
+                        'email' => $request->input('email'),
+                        'notes' => $request->input('notes'),
+                        'order_detail' => json_encode([$newProductDetail]),
+                    ]);
+                }
+            }
+        }
+
+        // prepare data for ipaymu
+        $data = [
+            'product' => $productName,
+            'qty' => $qty,
+            'price' => $price,
+            'returnUrl' => 'http://localhost.com',
+            'notifyUrl' => 'http://localhost.com',
+            'cancelUrl' => 'http://localhost.com',
+            'buyerName' => $request->input('full_name'),
+            'lang' => 'id'
+        ];
+
+        $resp = $this->ipaymuService->createPayment($data);
+
+        return "ok";
+        
     }
 }
