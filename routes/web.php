@@ -22,6 +22,7 @@ Route::post('/add-to-cart/{id}', [LandingController::class, 'addToCart'])->name(
 Route::get('/show-cart', [LandingController::class, 'showCart'])->name('landing.show-cart');
 Route::get('/remove-cart', [LandingController::class, 'removeCart'])->name('landing.remove-cart');
 Route::get('/remove-cart/{id}', [LandingController::class, 'removeCartProduct'])->name('landing.remove-cart-product');
+Route::post('/process-checkout', [LandingController::class, 'processCheckout'])->name('landing.process-checkout');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');

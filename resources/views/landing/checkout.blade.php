@@ -67,7 +67,8 @@ use App\Models\File;
   <div class="container">
     <div class="checkout__form">
       <h4>Billing Details</h4>
-      <form action="#">
+      <form action="{{ route('landing.process-checkout') }}" method="post">
+        @csrf
         <div class="row">
           <div class="col-lg-8 col-md-6">
             <div class="checkout__input">

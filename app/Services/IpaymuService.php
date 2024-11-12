@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Ipaymu;
+namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
@@ -16,24 +16,20 @@ class IpaymuService
       $apiKey = env('IPAYMU_API_KEY');
 
       $body = [
-        'product' => $data['products'],
+        'product' => $data['product'],
         'qty' => $data['qty'],
         'price' => $data['price'],
         'description' => $data['description'],
-        'imageUrl' => $data['imageUrl'],
-        'referenceId' => $data['referenceId'],
         'returnUrl' => $data['returnUrl'],
         'notifyUrl' => $data['notifyUrl'],
         'cancelUrl' => $data['cancelUrl'],
         'buyerName' => $data['buyerName'],
-        'paymentMethod' => $data['paymentMethod']
       ];
 
-      $requestBody = json_encode($body);
-      $hashedBody = strtolower(hash('sha256', $requestBody));
-      $stringToSign = "{$httpMethod}:{$vaNumber}:{$hashedBody}:{$apiKey}";
-
-      $signature = hash_hmac('sha256', $stringToSign, $apiKey);
+      $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+      $requestBody  = strtolower(hash('sha256', $jsonBody));
+      $stringToSign = strtoupper($httpMethod) . ':' . $vaNumber . ':' . $requestBody . ':' . $apiKey;
+      $signature    = hash_hmac('sha256', $stringToSign, $apiKey);
 
       $response = Http::withHeaders([
         'Content-Type' => 'application/json',
@@ -42,9 +38,13 @@ class IpaymuService
         'timestamp' => $timestamp,
       ])->post(env('IPAYMU_URL') . '/api/v2/payment', $body);
 
-      return $response->json();
+      $redirectUrl = $response->json()['Data']['Url'];
 
-      return response()->json(['status' => 'success']);
+      if (!$redirectUrl) {
+        throw 'redirect url not found';
+      }
+
+      return $redirectUrl;
     } catch (\Throwable $th) {
       return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
     }

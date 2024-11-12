@@ -123,7 +123,7 @@ use App\Models\File;
           <ul>
             <li>Total <span>Rp {{ number_format($totalPrice, 0, ',', '.') }}</span></li>
           </ul>
-          <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+          <a href="{{route('landing.checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
         </div>
       </div>
     </div>
