@@ -10,11 +10,12 @@ use App\Models\Ukm;
 use App\Models\Order;
 use App\Services\IpaymuService;
 use Illuminate\Support\Facades\DB;
+
 class LandingController extends Controller
 {
     function __construct(
-        protected IpaymuService $ipaymuService 
-    ){}
+        protected IpaymuService $ipaymuService
+    ) {}
 
     function index(): mixed
     {
@@ -81,7 +82,8 @@ class LandingController extends Controller
         return view('landing.detail', compact('product', 'categories', 'products', 'whatsappUrl'));
     }
 
-    function addToCart(Request $request, $id): mixed {
+    function addToCart(Request $request, $id): mixed
+    {
 
         $cart = session()->get('cart', []);
         $quantity = $request->input('quantity', 1);
@@ -97,10 +99,11 @@ class LandingController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->route('landing.show-cart')->with('success', 'Produk berhasil ditambahkan ke keranjang!');    
+        return redirect()->route('landing.show-cart')->with('success', 'Produk berhasil ditambahkan ke keranjang!');
     }
 
-    function showCart(): mixed {
+    function showCart(): mixed
+    {
         $cart = session()->get('cart', []);
         $categories = Category::all();
         $products = [];
@@ -108,30 +111,33 @@ class LandingController extends Controller
 
         foreach ($cart as $key => $value) {
             $product = Product::where('id', $value['product_id'])->first();
-            
+
             if ($product) { // Check if the product exists
                 $product->quantity = $value['quantity'];
                 $totalPrice += $product->price * $product->quantity;
                 $products[] = $product;
             }
         }
-    
+
         return view('landing.cart', compact('products', 'categories', 'totalPrice'));
     }
 
-    function removeCart(): mixed {
+    function removeCart(): mixed
+    {
         session()->forget('cart');
         return redirect()->route('landing.show-cart')->with('success', 'Keranjang berhasil dihapus!');
     }
 
-    function removeCartProduct($id): mixed {
+    function removeCartProduct($id): mixed
+    {
         $cart = session()->get('cart', []);
         unset($cart[$id]);
         session()->put('cart', $cart);
         return redirect()->route('landing.show-cart')->with('success', 'Produk berhasil dihapus dari keranjang!');
     }
 
-    function checkout(): mixed {
+    function checkout(): mixed
+    {
         $cart = session()->get('cart', []);
         $categories = Category::all();
         $products = [];
@@ -139,7 +145,7 @@ class LandingController extends Controller
 
         foreach ($cart as $key => $value) {
             $product = Product::where('id', $value['product_id'])->first();
-            
+
             if ($product) { // Check if the product exists
                 $product->quantity = $value['quantity'];
                 $totalPrice += $product->price * $product->quantity;
@@ -150,69 +156,86 @@ class LandingController extends Controller
         return view('landing.checkout', compact('products', 'categories', 'totalPrice'));
     }
 
-    function processCheckout(Request $request) : mixed {
-        try {
-            DB::beginTransaction();
+    function processCheckout(Request $request): mixed
+    {
+        DB::beginTransaction();
 
+        try {
             $cart = session()->get('cart', []);
+            $productIds = array_column($cart, 'product_id');
+            $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+
             $productName = [];
             $qty = [];
             $price = [];
             $description = [];
-    
-            foreach ($cart as $key => $value) {
-                $product = Product::where('id', $value['product_id'])->first();
-            
-                if ($product) {
-                    $product->quantity = $value['quantity'];
-                    $product->total_price = $product->price * $product->quantity;
-    
-                    $productName[] = $product->product_name;
-                    $qty[] = $product->quantity;
-                    $price[] = $product->price;
-                    $description[] = '-';
-            
-                    $newProductDetail = [
-                        'product_id' => $product->id,
-                        'name' => $product->product_name,
-                        'price' => $product->price,
-                        'quantity' => $product->quantity,
-                        'total_price' => $product->total_price,
-                    ];
-        
-                    $order = Order::where('id_ukm', $product->id_ukm)->first();
-            
+            $previousFlagId = null;
+            $productDetails = [];
+            $order = null;
+
+            foreach ($cart as $item) {
+                $product = $products->get($item['product_id']);
+                $productName[] = $product->product_name;
+                $qty[] = $item['quantity'];
+                $price[] = $product->price;
+                $description[] = '-';
+
+                if (!$product) {
+                    throw new \Exception("Produk dengan ID {$item['product_id']} tidak ditemukan.");
+                }
+
+                $product->quantity = $item['quantity'];
+                $product->total_price = $product->price * $product->quantity;
+
+                $newProductDetail = [
+                    'product_id' => $product->id,
+                    'name' => $product->product_name,
+                    'price' => $product->price,
+                    'quantity' => $product->quantity,
+                    'total_price' => $product->total_price,
+                ];
+
+                // Create a new order if the flag ID changes
+                if ($previousFlagId !== $product->id_ukm) {
                     if ($order) {
-                        $existingOrderDetails = json_decode($order->order_detail, true);
-        
-                        $existingOrderDetails[] = $newProductDetail;
-            
+                        // Update previous order with accumulated details and total price
                         $order->update([
-                            'full_name' => $request->input('full_name'),
-                            'address' => $request->input('address'),
-                            'regency' => $request->input('regency'),
-                            'postal_code' => $request->input('postal_code'),
-                            'phone_number' => $request->input('phone_number'),
-                            'email' => $request->input('email'),
-                            'notes' => $request->input('notes'),
-                            'order_detail' => json_encode($existingOrderDetails),
-                        ]);
-                    } else {
-                        $order = Order::create([
-                            'id_ukm' => $product->id_ukm,
-                            'full_name' => $request->input('full_name'),
-                            'address' => $request->input('address'),
-                            'regency' => $request->input('regency'),
-                            'postal_code' => $request->input('postal_code'),
-                            'phone_number' => $request->input('phone_number'),
-                            'email' => $request->input('email'),
-                            'notes' => $request->input('notes'),
-                            'order_detail' => json_encode([$newProductDetail]),
+                            'order_detail' => json_encode($productDetails),
+                            'total_price' => array_sum(array_column($productDetails, 'total_price')),
                         ]);
                     }
+
+                    // Create new order and reset product details
+                    $previousFlagId = $product->id_ukm;
+                    $productDetails = [$newProductDetail];
+
+                    $order = Order::create([
+                        'id_ukm' => $product->id_ukm,
+                        'order_number' => 'ORD-' . time(),
+                        'full_name' => $request->input('full_name'),
+                        'address' => $request->input('address'),
+                        'regency' => $request->input('regency'),
+                        'postal_code' => $request->input('postal_code'),
+                        'phone_number' => $request->input('phone_number'),
+                        'email' => $request->input('email'),
+                        'notes' => $request->input('notes'),
+                        'total_price' => $product->total_price,
+                        'order_detail' => json_encode([$newProductDetail]),
+                    ]);
+                } else {
+                    // Add to the same order if the flag ID matches
+                    $productDetails[] = $newProductDetail;
                 }
             }
-    
+
+            // Update the last order after loop
+            if ($order) {
+                $order->update([
+                    'order_detail' => json_encode($productDetails),
+                    'total_price' => array_sum(array_column($productDetails, 'total_price')),
+                ]);
+            }
+
             // prepare data for ipaymu
             $data = [
                 'product' => $productName,
@@ -225,15 +248,17 @@ class LandingController extends Controller
                 'buyerName' => $request->input('full_name'),
                 'lang' => 'id'
             ];
-    
+
             $resp = $this->ipaymuService->createPayment($data);
 
             DB::commit();
-            
+
+            session()->forget('cart');
+
             return redirect($resp);
-        } catch(\Throwable $th) {
+        } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
-        }        
+        }
     }
 }

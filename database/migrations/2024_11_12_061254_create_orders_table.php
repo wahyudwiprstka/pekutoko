@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('id_ukm');
+            $table->string('order_number', 255);
             $table->string('full_name', 255);
             $table->text('address');
             $table->string('regency', 255);

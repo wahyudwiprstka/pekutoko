@@ -89,15 +89,15 @@ use App\Models\File;
                   <h5>{{$list->product_name}}</h5>
                 </td>
                 <td class="shoping__cart__price">
-                Rp {{ number_format($list->price, 0, ',', '.') }}
+                  Rp {{ number_format($list->price, 0, ',', '.') }}
                 </td>
                 <td class="shoping__cart__quantity">
                   <div class="quantity">
-                  {{ $list->quantity }}
+                    {{ $list->quantity }}
                   </div>
                 </td>
                 <td class="shoping__cart__total">
-                Rp {{ number_format($list->price * $list->quantity, 0, ',', '.') }}
+                  Rp {{ number_format($list->price * $list->quantity, 0, ',', '.') }}
                 </td>
                 <td class="shoping__cart__item__close">
                   <a href="{{ route('landing.remove-cart-product', ['id' => $list->id]) }}">
@@ -123,7 +123,9 @@ use App\Models\File;
           <ul>
             <li>Total <span>Rp {{ number_format($totalPrice, 0, ',', '.') }}</span></li>
           </ul>
+          @if (session()->has('cart') && count(session()->get('cart')) > 0)
           <a href="{{route('landing.checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
+          @endif
         </div>
       </div>
     </div>
@@ -131,4 +133,3 @@ use App\Models\File;
 </section>
 <!-- Shoping Cart Section End -->
 @endsection
-

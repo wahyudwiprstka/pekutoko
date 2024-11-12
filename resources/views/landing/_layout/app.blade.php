@@ -60,6 +60,18 @@
                         </ul>
                     </nav>
                 </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            @php
+                            $cart = session()->get('cart', []);
+                            $cartCount = count($cart);
+
+                            @endphp
+                            <li><a href="{{ route('landing.show-cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartCount }}</span></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>

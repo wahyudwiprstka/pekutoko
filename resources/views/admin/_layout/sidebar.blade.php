@@ -63,6 +63,14 @@
             </a>
         </li>
         @endif
+
+        <li class="{{ Request::routeIs(['order']) ? 'mm-active' : '' }}">
+            <a href="{{ route('order') }}">
+                <div class="parent-icon"><i class='bx bx-shopping-bag'></i>
+                </div>
+                <div class="menu-title">Order</div>
+            </a>
+        </li>
     </ul>
     <!--end navigation-->
 </div>

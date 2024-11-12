@@ -71,6 +71,7 @@ use App\Models\File;
                             <div class="quantity">
                                 <div class="pro-qty">
                                     <input type="number" name="quantity" value="1" min="1" required>
+                                    <input type="hidden" name="id_ukm" value="{{$product->id_ukm}}" required>
                                 </div>
                             </div>
                         </div>
