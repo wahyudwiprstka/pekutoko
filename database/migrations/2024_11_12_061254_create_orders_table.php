@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('order_detail');
             $table->double('total_price');
             $table->tinyInteger('order_status');
+            $table->string('session_id', 255);
             $table->timestamps();
         });
     }

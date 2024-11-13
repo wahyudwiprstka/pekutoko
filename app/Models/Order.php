@@ -27,6 +27,7 @@ class Order extends Model
         'order_detail',
         'total_price',
         'order_status',
+        'session_id',
     ];
 
     public function ukm()

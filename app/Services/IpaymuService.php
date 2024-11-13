@@ -38,7 +38,7 @@ class IpaymuService
         'timestamp' => $timestamp,
       ])->post(env('IPAYMU_URL') . '/api/v2/payment', $body);
 
-      $redirectUrl = $response->json()['Data']['Url'];
+      $redirectUrl = $response->json()['Data'];
 
       if (!$redirectUrl) {
         throw 'redirect url not found';

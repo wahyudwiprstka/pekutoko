@@ -179,6 +179,7 @@ class LandingController extends Controller
                 $qty[] = $item['quantity'];
                 $price[] = $product->price;
                 $description[] = '-';
+                $orderExistingId[] = [];
 
                 if (!$product) {
                     throw new \Exception("Produk dengan ID {$item['product_id']} tidak ditemukan.");
@@ -222,6 +223,8 @@ class LandingController extends Controller
                         'total_price' => $product->total_price,
                         'order_detail' => json_encode([$newProductDetail]),
                     ]);
+
+                    $orderExistingId[] = $order->id;
                 } else {
                     // Add to the same order if the flag ID matches
                     $productDetails[] = $newProductDetail;
@@ -243,19 +246,23 @@ class LandingController extends Controller
                 'price' => $price,
                 'description' => $description,
                 'returnUrl' => 'http://localhost.com',
-                'notifyUrl' => 'http://localhost.com',
+                'notifyUrl' => request()->root() . '/update-status-order',
                 'cancelUrl' => 'http://localhost.com',
                 'buyerName' => $request->input('full_name'),
-                'lang' => 'id'
+                'lang' => 'id',
             ];
 
             $resp = $this->ipaymuService->createPayment($data);
+
+            Order::whereIn('id', $orderExistingId)->update([
+                'session_id' => $resp['SessionID'],
+            ]);
 
             DB::commit();
 
             session()->forget('cart');
 
-            return redirect($resp);
+            return redirect($resp['Url']);
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
