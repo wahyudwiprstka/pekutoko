@@ -179,7 +179,7 @@ class LandingController extends Controller
                 $qty[] = $item['quantity'];
                 $price[] = $product->price;
                 $description[] = '-';
-                $orderExistingId[] = [];
+                $orderExistingId[] = null;
 
                 if (!$product) {
                     throw new \Exception("Produk dengan ID {$item['product_id']} tidak ditemukan.");

@@ -11,7 +11,10 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Landing\LandingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
+use App\Http\Middleware\NgrokMiddleware;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/category/{id}', [LandingController::class, 'category'])->name('landing.category');
@@ -27,6 +30,9 @@ Route::post('/process-checkout', [LandingController::class, 'processCheckout'])-
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');
+
+
+Route::middleware([NgrokMiddleware::class, VerifyCsrfToken::class])->post('/update-status-order', [PaymentController::class, 'updateStatusOrder'])->name('update-status-order');
 
 Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(function () {
     Route::get('/logout', function () {

@@ -10,8 +10,8 @@ class Order extends Model
     use HasFactory;
 
     public const WAITING_PAYMENT = 0;
-    public const WAITING_SEND = 2;
-    public const COMPLETE = 1;
+    public const WAITING_SEND = 1;
+    public const COMPLETE = 2;
     public const CANCEL = 3;
 
     protected $fillable = [
