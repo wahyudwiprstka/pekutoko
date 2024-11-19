@@ -52,7 +52,7 @@ class LandingController extends Controller
             $ukm = Ukm::find($id);
             $products = Product::where('id_ukm', $id)->get();
             $categories = Category::all();
-            return view('landing.search', compact('ukm', 'categories', 'products'));
+            return view('landing.umkmdetail', compact('ukm', 'categories', 'products'));
         } else {
             $categories = Category::all();
             $products = Product::all();

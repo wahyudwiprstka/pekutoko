@@ -1,14 +1,12 @@
 @extends('landing._layout.app')
 
 @section('content')
-<!-- Header Section Begin -->
+
 @php
 use App\Models\File;
-use App\Models\Product;
 @endphp
 
-<!-- Hero Section Begin -->
-<section class="hero">
+<section class="hero hero-normal">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -37,18 +35,9 @@ use App\Models\Product;
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>081246241129</h5>
+                            <h5>085123456789</h5>
                             <span>Support 24 Jam</span>
                         </div>
-                    </div>
-                </div>
-                <div class="hero__item set-bg" data-setbg="{{ asset('assets/landing/img/hero/banner.jpg') }}">
-                    <div class="hero__text">
-                        <br>
-                        <br>
-                        <br>
-                        <h2>Produk UMKM <br />100% Asli dan Murah</h2>
-                        <p>Pengambilan Gratis dan Pengiriman Tersedia</p>
                     </div>
                 </div>
             </div>
@@ -57,48 +46,29 @@ use App\Models\Product;
 </section>
 <!-- Hero Section End -->
 
-<!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-
-                @foreach ($products as $list)
-
-                @php
-                $file = File::where('model_id', $list->id)->where('model', 'products')->first();
-                @endphp
-
-                <div class="col-lg-3">
-                    <div class="categories__item">
-                        <a href="{{ route('landing.detail', ['id' => $list->id]) }}">
-                            <img class="categories__img set-bg" src="{{ asset($file->filename) }}"/>
-                            <div>
-                                <h6>{{$list->product_name}}</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                @endforeach
-
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Categories Section End -->
-
-<!-- Featured Section Begin -->
 <section class="featured spad">
     <div class="container">
+        <div class="card umkm__card">
+            <div class="umkm__card__div">
+                <img class="umkm__card__img" src="{{ asset('assets/landing/img/shop.png') }}"/> 
+                <div class="umkm__card__info">
+                    <h3>{{$ukm->ukm_name}}</h3>
+                    <h5>{{$ukm->ukm_address}}</h5>
+                    <h5>{{$ukm->wa_pic}}</h5>
+                    <button class="umkm__card__btn"><a href="">Hubungi penjual</a></button>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Produk</h2>
+                    <h2>Produk UMKM ini</h2>
                 </div>
             </div>
         </div>
         <div class="row featured__filter">
 
+            @if (count($products) != 0)
             @foreach ($products as $list)
 
             @php
@@ -115,27 +85,16 @@ use App\Models\Product;
                 </div>
             </div>
             @endforeach
+            @else
+            <div class="col-lg-12">
+                <div class="alert alert-danger" role="alert">
+                    Produk tidak ditemukan
+                </div>
+            </div>
+            @endif
+
+
         </div>
     </div>
 </section>
-<!-- Featured Section End -->
-
-<!-- Banner Begin -->
-<div class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="{{ asset('assets/landing/img/banner/banner-1.jpg') }}" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="{{ asset('assets/landing/img/banner/banner-2.jpg') }}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@endsection
+@endsection 
