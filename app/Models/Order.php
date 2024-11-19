@@ -11,8 +11,9 @@ class Order extends Model
 
     public const WAITING_PAYMENT = 0;
     public const WAITING_SEND = 1;
-    public const COMPLETE = 2;
-    public const CANCEL = 3;
+    public const SENDING = 2;
+    public const COMPLETE = 3;
+    public const CANCEL = 4;
 
     protected $fillable = [
         'id_ukm',
@@ -37,17 +38,13 @@ class Order extends Model
 
     public function getOrderStatusText()
     {
-        switch ($this->order_status) {
-            case self::WAITING_PAYMENT:
-                return 'Menunggu Pembayaran';
-            case self::WAITING_SEND:
-                return 'Menunggu Pengiriman';
-            case self::COMPLETE:
-                return 'Selesai';
-            case self::CANCEL:
-                return 'Dibatalkan';
-            default:
-                return 'Status Tidak Dikenal';
-        }
+        return match ($this->order_status) {
+            self::WAITING_PAYMENT => 'Menunggu Pembayaran',
+            self::WAITING_SEND => 'Menunggu Kirim',
+            self::SENDING => 'Sedang Dikirim',
+            self::COMPLETE => 'Selesai',
+            self::CANCEL => 'Dibatalkan',
+            default => 'Unknown',
+        };
     }
 }

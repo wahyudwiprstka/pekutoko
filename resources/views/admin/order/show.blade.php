@@ -33,6 +33,30 @@ use App\Models\File;
           <p><strong>Catatan:</strong> {{ $order->notes }}</p>
 
           <p><strong>Status Order:</strong> {{ $order->getOrderStatusText() }}</p>
+          <!-- add button sending order if order_status == 1 -->
+
+          @if ($order->order_status != 4)
+          <div class="row">
+            <div class="col-md-6">
+              @if($order->order_status == 1)
+              <form id="orderForm-{{ $order->id }}" action="{{ route('order.update', $order->id) }}" method="POST">
+                @csrf
+                <input type="hidden" name="order_status" value="2">
+                <button type="button" class="btn btn-primary" onclick="updateOrder('{{ $order->id }}')">Kirim Barang</button>
+              </form>
+              @endif
+
+              @if($order->order_status == 2)
+              <form id="orderForm-{{ $order->id }}" action="{{ route('order.update', $order->id) }}" method="POST">
+                @csrf
+                <input type="hidden" name="order_status" value="3">
+                <button type="button" class="btn btn-success" onclick="updateOrder('{{ $order->id }}')">Selesai</button>
+              </form>
+              @endif
+            </div>
+          </div>
+          @endif
+
         </div>
       </div>
     </div>
@@ -72,6 +96,14 @@ use App\Models\File;
               @endforeach
             </tbody>
           </table>
+
+          @if ($order->order_status != 4 && $order->order_status != 3)
+          <form id="orderForm-{{ $order->id }}" action="{{ route('order.update', $order->id) }}" method="POST">
+            @csrf
+            <input type="hidden" name="order_status" value="4">
+            <button type="button" class="btn btn-danger" onclick="updateOrder('{{ $order->id }}')">Lakukan Pembatalan</button>
+          </form>
+          @endif
         </div>
 
       </div>
@@ -81,3 +113,25 @@ use App\Models\File;
 </div>
 
 @endsection
+
+@push('script')
+<script>
+  function updateOrder(orderId) {
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yakin',
+      cancelButtonText: 'Tidak Yakin'
+    }).then((result) => {
+      // send to server
+      if (result.isConfirmed) {
+        // Submit the form programmatically
+        document.getElementById('orderForm-' + orderId).submit();
+      }
+    });
+  }
+</script>
+@endpush

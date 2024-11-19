@@ -83,4 +83,5 @@ Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(fu
 
     Route::get('/order', [OrderController::class, 'index'])->name('order');
     Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
+    Route::post('/order/{id}', [OrderController::class, 'update'])->name('order.update');
 });
