@@ -32,7 +32,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');
 
 
-Route::middleware([NgrokMiddleware::class, VerifyCsrfToken::class])->post('/update-status-order', [PaymentController::class, 'updateStatusOrder'])->name('update-status-order');
+// Route::middleware([NgrokMiddleware::class, VerifyCsrfToken::class])->post('/update-status-order', [PaymentController::class, 'updateStatusOrder'])->name('update-status-order');
 
 Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(function () {
     Route::get('/logout', function () {
