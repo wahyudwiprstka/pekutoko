@@ -239,15 +239,19 @@ class LandingController extends Controller
                 ]);
             }
 
+            if($description == null || $description == ''){
+                $description = '-';
+            } 
+
             // prepare data for ipaymu
             $data = [
                 'product' => $productName,
                 'qty' => $qty,
                 'price' => $price,
                 'description' => $description,
-                'returnUrl' => 'http://localhost.com',
+                'returnUrl' => request()->root(),
                 'notifyUrl' => request()->root() . '/update-status-order',
-                'cancelUrl' => 'http://localhost.com',
+                'cancelUrl' => request()->root(),
                 'buyerName' => $request->input('full_name'),
                 'lang' => 'id',
             ];
@@ -267,5 +271,11 @@ class LandingController extends Controller
             DB::rollBack();
             return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
         }
+
+        
+    }
+
+    function caraPembelian(): mixed{
+        return view('landing.caraPembelian');
     }
 }

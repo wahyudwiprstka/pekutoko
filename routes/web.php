@@ -27,6 +27,7 @@ Route::get('/show-cart', [LandingController::class, 'showCart'])->name('landing.
 Route::get('/remove-cart', [LandingController::class, 'removeCart'])->name('landing.remove-cart');
 Route::get('/remove-cart/{id}', [LandingController::class, 'removeCartProduct'])->name('landing.remove-cart-product');
 Route::post('/process-checkout', [LandingController::class, 'processCheckout'])->name('landing.process-checkout');
+Route::get('/cara-pembelian', [LandingController::class, 'caraPembelian'])->name('landing.caraPembelian');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');

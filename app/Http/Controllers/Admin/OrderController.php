@@ -52,7 +52,7 @@ class OrderController extends Controller
         break;
     }
 
-    // $this->whatsappService->sendMessage($order->phone_number, $message);
+    $this->whatsappService->sendMessage($order->phone_number, $message);
     return redirect()->route('order.show', $id);
   }
 }

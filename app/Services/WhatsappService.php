@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Exception;
 
 class WhatsappService
 {
@@ -43,3 +44,4 @@ class WhatsappService
     return json_decode($result, true); // Mengembalikan hasil sebagai array
   }
 }
+

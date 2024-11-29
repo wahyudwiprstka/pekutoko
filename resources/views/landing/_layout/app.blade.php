@@ -86,20 +86,20 @@
     <!-- Banner End -->
 
     <!-- Footer Section Begin -->
-    <footer>
+    <footer style="background-color: #4f46e5; margin-top: 50px">
+        <div style="padding: 30px 0">
+            <div style="padding: 0 400px">
+                <h5 class="fw-bold" style="color: white; font-weight: 700">Tentang Pekutoko</h5>
+                <p style="color: white; text-align: justify; text-justify: inter-word; margin: 0">
+                    Pekutoko adalah sebuah platform marketplace yang didirikan untuk mendukung dan memajukan UMKM, khususnya di desa Pekutatan. Marketplace ini dikelola langsung oleh pihak desa, dengan tujuan utama untuk memberikan akses kepada para pelaku UMKM di desa tersebut untuk memasarkan produk mereka ke pasar yang lebih luas, baik secara online maupun offline. <br>
 
-        <div class="col-lg-12">
-            <div class="footer__copyright">
-                <div class="footer__copyright__text">
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy; Wahyu Dwi Prastika <script>
-                            document.write(new Date().getFullYear());
-                        </script>. All rights reserved</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                </div>
-                <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+    Konsep utama dari Pekutoko adalah memberikan ruang bagi usaha kecil dan menengah di desa untuk tumbuh dan berkembang, dengan memanfaatkan teknologi digital untuk mengakses pasar yang sebelumnya mungkin sulit dijangkau. Sebagai platform yang dikelola oleh desa, Pekutoko tidak hanya fokus pada transaksi jual-beli, tetapi juga pada pemberdayaan ekonomi lokal dengan memberikan pelatihan, penguatan kapasitas, dan akses ke sumber daya yang diperlukan oleh UMKM.
+                </p>
             </div>
-
+            <hr style="width: 70%; color:white; background-color: white;"/>
+            <div style="padding: 0 400px">
+                <p style="color: white; text-align: center;">Made with 🤍 by Pekutoko</p>
+            </div>
         </div>
     </footer>
     <!-- Footer Section End -->
