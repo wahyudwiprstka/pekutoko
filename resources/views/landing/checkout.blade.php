@@ -33,7 +33,7 @@ use App\Models\File;
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>085123456789</h5>
+                            <h5>081246241129</h5>
                             <span>Support 24 Jam</span>
                         </div>
                     </div>

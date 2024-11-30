@@ -33,7 +33,7 @@ use App\Models\File;
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>085123456789</h5>
+                            <h5>081246241129</h5>
                             <span>Support 24 Jam</span>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ use App\Models\File;
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
                     <h3>{{ $product->product_name }}</h3>
-                    <h5>{{ $product->ukm->ukm_name }} UMKM</h5>
+                    <a href={{request()->root() . "/umkm/" . $product->ukm->id}}><h5>{{ $product->ukm->ukm_name }}</h5></a>
                     <div class="product__details__price">{{ 'Rp ' . number_format($product->price, 0, ',', '.') }}</div>
                     <p>{{ $product->description }}</p>
                     <form action="{{ route('landing.add-to-cart', ['id' => $product->id]) }}" method="POST">
@@ -104,9 +104,10 @@ use App\Models\File;
                 @endphp
 
                 <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{ asset($file->filename) }}">
-                        <h5><a href="{{ route('landing.detail', ['id' => $list->id]) }}">{{$list->product_name}}</a></h5>
-                    </div>
+                    <a href="{{ route('landing.detail', ['id' => $list->id]) }}">
+                        <img class="categories__item set-bg rounded" src="{{ asset($file->filename) }}"/>
+                        <h5 class="text-center mt-2">{{$list->product_name}}</h5>
+                    </a>
                 </div>
                 @endforeach
             </div>

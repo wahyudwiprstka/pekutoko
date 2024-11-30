@@ -35,7 +35,7 @@ use App\Models\File;
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>085123456789</h5>
+                            <h5>081246241129</h5>
                             <span>Support 24 Jam</span>
                         </div>
                     </div>
@@ -55,7 +55,10 @@ use App\Models\File;
                     <h3>{{$ukm->ukm_name}}</h3>
                     <h5>{{$ukm->ukm_address}}</h5>
                     <h5>{{$ukm->wa_pic}}</h5>
-                    <button class="umkm__card__btn"><a href="">Hubungi penjual</a></button>
+                    @php
+                        $hubwa = Str::replaceFirst('0', '+62', $ukm->wa_pic)
+                    @endphp
+                    <button class="umkm__card__btn"><a href={{"https://wa.me/" . $hubwa}} target="_blank">Hubungi penjual</a></button>
                 </div>
             </div>
         </div>
