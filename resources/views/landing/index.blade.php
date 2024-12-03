@@ -106,13 +106,15 @@ use App\Models\Product;
             @endphp
 
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <img class="featured__item__pic set-bg" src="{{ asset($file->filename) }}"/>
-                    <div class="featured__item__text">
-                        <h6><a href="{{ route('landing.detail', ['id' => $list->id]) }}">{{ $list->product_name }}</a></h6>
-                        <h5>{{ 'Rp ' . number_format($list->price, 0, ',', '.') }}</h5>
+                <a href="{{ route('landing.detail', ['id' => $list->id]) }}">
+                    <div class="featured__item">
+                        <img class="featured__item__pic set-bg" src="{{ asset($file->filename) }}"/>
+                        <div class="featured__item__text">
+                            <h6>{{ $list->product_name }}</h6>
+                            <h5>{{ 'Rp ' . number_format($list->price, 0, ',', '.') }}</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             @endforeach
         </div>
