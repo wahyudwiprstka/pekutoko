@@ -94,6 +94,9 @@
                     Pekutoko adalah sebuah platform marketplace yang didirikan untuk mendukung dan memajukan UMKM, khususnya di desa Pekutatan. Marketplace ini dikelola langsung oleh pihak desa, dengan tujuan utama untuk memberikan akses kepada para pelaku UMKM di desa tersebut untuk memasarkan produk mereka ke pasar yang lebih luas, baik secara online maupun offline. <br>
 
     Konsep utama dari Pekutoko adalah memberikan ruang bagi usaha kecil dan menengah di desa untuk tumbuh dan berkembang, dengan memanfaatkan teknologi digital untuk mengakses pasar yang sebelumnya mungkin sulit dijangkau. Sebagai platform yang dikelola oleh desa, Pekutoko tidak hanya fokus pada transaksi jual-beli, tetapi juga pada pemberdayaan ekonomi lokal dengan memberikan pelatihan, penguatan kapasitas, dan akses ke sumber daya yang diperlukan oleh UMKM.
+    <br>
+
+    Untuk cara pembelian produk bisa dilihat <a href="{{route('landing.caraPembelian')}}">disini</a>
                 </p>
             </div>
             <hr style="width: 70%; color:white; background-color: white;"/>

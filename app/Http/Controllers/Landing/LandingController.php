@@ -276,6 +276,7 @@ class LandingController extends Controller
     }
 
     function caraPembelian(): mixed{
-        return view('landing.caraPembelian');
+        $categories = Category::all();
+        return view('landing.caraPembelian', compact('categories'));
     }
 }

@@ -69,13 +69,13 @@ use App\Models\File;
                         @csrf
                         <div class="product__details__quantity">
                             <div class="quantity">
-                                <div class="pro-qty">
+                                <div class="pro-qty rounded">
                                     <input type="number" name="quantity" value="1" min="1" required>
                                     <input type="hidden" name="id_ukm" value="{{$product->id_ukm}}" required>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="primary-btn">TAMBAH KE KERANJANG</button>
+                        <button type="submit" class="primary-btn rounded">TAMBAH KE KERANJANG</button>
                     </form>
                 </div>
             </div>

@@ -41,7 +41,14 @@
 </section>
 <section class="cara__pembelian" style="min-height: 80%">
     <div class="container">
-        <h3>Cara Pembelian</h3>
+        <h3 class="mb-2">Cara Pembelian</h3>
+        <h5>1. Pilih produk yang akan dibeli</h5>
+        <h5>2. Masukkan produk ke keranjang</h5>
+        <h5>3. Jika ingin membeli produk lain, pilih "Continue Shopping"</h5>
+        <h5>4. Jika sudah selesai, pergi ke halaman "Cart" dan klik "Proceed Checkout"</h5>
+        <h5>5. Pilih metode pembayaran dan bayar</h5>
+        <h5>6. Jika pembayaran berhasil, pembeli akan diberikan notifikasi lewat WhatsApp</h5>
+        <h5>7. Penjual akan mengirim produk langsung ke rumah pembeli.</h5>
     </div>
 </section>
 @endsection
