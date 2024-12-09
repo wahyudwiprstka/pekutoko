@@ -78,7 +78,7 @@ class ProductController extends Controller
 
                 $file = $request->file('file');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->move(storage_path('uploads'), $fileName);
+                $file->move(storage_path('app/public/uploads'), $fileName);
                 $filePath = '/storage/uploads/' . $fileName;
 
                 // save data to file model
@@ -158,7 +158,7 @@ class ProductController extends Controller
 
                 $file = $request->file('file');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->move(storage_path('uploads'), $fileName);
+                $file->move(storage_path('app/public/uploads'), $fileName);
 
                 $filePath = '/storage/uploads/' . $fileName;
 
