@@ -78,9 +78,8 @@ class ProductController extends Controller
 
                 $file = $request->file('file');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs(public_path('uploads/', $fileName));
-                // $file->move(public_path('uploads'), $fileName);
-                $filePath = '/uploads/' . $fileName;
+                $file->move(storage_path('uploads'), $fileName);
+                $filePath = '/storage/uploads/' . $fileName;
 
                 // save data to file model
                 File::create([
@@ -159,9 +158,9 @@ class ProductController extends Controller
 
                 $file = $request->file('file');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('uploads'), $fileName);
+                $file->move(storage_path('uploads'), $fileName);
 
-                $filePath = '/uploads/' . $fileName;
+                $filePath = '/storage/uploads/' . $fileName;
 
                 // save data to file model
                 $file = File::where('model_id', $product->id)->where('model', 'products')->first();
