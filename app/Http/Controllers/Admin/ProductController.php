@@ -78,7 +78,7 @@ class ProductController extends Controller
 
                 $file = $request->file('file');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs('images', $fileName, 'public_html');
+                $file->storeAs(public_path('uploads/', $fileName));
                 // $file->move(public_path('uploads'), $fileName);
                 $filePath = '/uploads/' . $fileName;
 
