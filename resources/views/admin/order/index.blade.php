@@ -21,6 +21,17 @@
     <div class="card">
       <div class="card-body">
         <div class="table-responsive">
+          <form class="date__sort">
+            <div>
+                <label for="tanggal_awal">Tanggal Awal:</label>
+                <input type="date" id="tanggal_awal" name="tanggal_awal" class="sort_tanggal" required/>
+              </div>
+              <div>
+                <label for="tanggal_akhir">Tanggal Akhir:</label>
+                <input type="date" id="tanggal_akhir" name="tanggal_akhir" class="sort_tanggal" required/>
+              </div>
+              <button type="submit" class="btn-primary">Submit</button>
+            </form>
           <table id="order-table" class="table table-striped table-bordered" style="width:100%">
             <thead>
               <tr>
@@ -29,6 +40,7 @@
                 <th>Nama UMKM</th>
                 <th>Nama Pembeli</th>
                 <th>Total Pembelian</th>
+                <th>Tanggal</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -44,6 +56,7 @@
                 <td>{{ $list->ukm->ukm_name }}</td>
                 <td>{{ $list->full_name }}</td>
                 <td>{{ 'Rp ' . number_format($list->total_price, 0, ',', '.') }}</td>
+                <td>{{ $list->created_at->format('d M Y') }}</td>
                 <td>{{ $list->getOrderStatusText() }}</td>
               </tr>
               @endforeach

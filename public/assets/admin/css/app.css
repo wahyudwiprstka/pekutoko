@@ -2451,6 +2451,32 @@ input::placeholder {
     cursor: pointer;
 }
 
+.sort_tanggal {
+    border: #c5c5c5 1px solid;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.date__sort {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+    border: none;
+    gap: 20px;
+    transition: background-color 0.2s ease-out;
+}
+
+.date__sort button {
+    padding: 7px 20px;
+    box-shadow: none;
+    border: none;
+    border-radius: 4px;
+    transition: 0.2s ease-in-out;
+}
+
 @media screen and (max-width: 1280px) {
     .email-header {
         height: auto;

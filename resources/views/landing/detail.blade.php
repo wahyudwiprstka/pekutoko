@@ -55,7 +55,7 @@ use App\Models\File;
                         $file = File::where('model_id', $product->id)->where('model', 'products')->first();
                         @endphp
 
-                        <img class="product__details__pic__item--large" src="{{ asset($file->filename) }}" alt="">
+                        <img class="product__details__pic__item--large rounded" src="{{ asset($file->filename) }}" alt="">
                     </div>
                 </div>
             </div>

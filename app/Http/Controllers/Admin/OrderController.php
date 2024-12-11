@@ -14,23 +14,33 @@ class OrderController extends Controller
   function __construct(
     protected WhatsappService $whatsappService
   ) {}
-  public function index()
+  public function index(Request $request)
   {
     if (session('userRole') == 'admin' || session('userRole') == 'superadmin') {
-      $orders = Order::all();
+      if($request["tanggal_awal"] && $request["tanggal_akhir"]){
+        $orders = Order::where('created_at', '>=', $request["tanggal_awal"])->where('created_at', '<=', $request["tanggal_akhir"])->get();
+      }else{
+        $orders = Order::all();
+      }
     } else {
       $user = User::find(auth()->user()->id);
-      $orders = Order::where('id_ukm', $user->ukm->id)->get();
+      if($request["tanggal_awal"] && $request["tanggal_akhir"]){
+        $orders = Order::where('id_ukm', $user->ukm->id)->whereDate('created_at', '>=', $request["tanggal_awal"])->whereDate('created_at', '<=', $request["tanggal_akhir"])->get();
+      }else{
+        $orders = Order::where('id_ukm', $user->ukm->id)->get();
+      }
     }
-    return view('admin.order.index', compact('orders'));
+
+    $tanggal_awal = $request['tanggal_awal'];
+    return view('admin.order.index', compact('orders', 'tanggal_awal'));
   }
 
-  public function show($id)
+  public function show($id, Request $request)
   {
-    $order = Order::find($id);
+    $order = Order::find($id);      
 
     $products = json_decode($order->order_detail, true);
-    return view('admin.order.show', compact('order', 'products'));
+    return view('admin.order.show', compact('order', 'products', 'tanggal_awal'));
   }
 
   // make update order
