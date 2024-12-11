@@ -35,7 +35,7 @@
                                 <label for="inputIdentity" class="col-sm-3 col-form-label">Kategori Produk</label>
                                 <div class="col-sm-9">
                                     <select class="form-select mb-3" name="id_category" aria-label="Default select example" required>
-                                        <option selected>Pilih Pategori Produk</option>
+                                        <option selected>Pilih Kategori Produk</option>
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                                         @endforeach

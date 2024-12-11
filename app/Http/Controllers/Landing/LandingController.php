@@ -250,7 +250,7 @@ class LandingController extends Controller
                 'price' => $price,
                 'description' => $description,
                 'returnUrl' => request()->root(),
-                'notifyUrl' => request()->root() . '/update-status-order',
+                'notifyUrl' => request()->root() . '/api/update-status-order',
                 'cancelUrl' => request()->root(),
                 'buyerName' => $request->input('full_name'),
                 'lang' => 'id',
