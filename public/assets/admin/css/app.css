@@ -2355,6 +2355,15 @@ input::placeholder {
         animdropdown;
 }
 
+.chart {
+    margin: auto;
+    width: 70vw;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
 @-webkit-keyframes animdropdown {
     from {
         -webkit-transform: translate3d(0, 6px, 0);
@@ -2454,7 +2463,7 @@ input::placeholder {
 .sort_tanggal {
     border: #c5c5c5 1px solid;
     padding: 4px;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .date__sort {

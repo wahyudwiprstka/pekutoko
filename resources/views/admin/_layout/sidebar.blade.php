@@ -45,6 +45,15 @@
         </li>
         @endif
 
+        @if (session('userRole') == 'ukm')
+        <li class="{{ Request::routeIs(['dashboard.dashboardUMKM']) ? 'mm-active' : '' }}">
+            <a href="{{ route('dashboard.dashboardUMKM') }}">
+                <div class="parent-icon"><i class='bx bx-user'></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        @endif
 
         <li class="{{ Request::routeIs(['product']) ? 'mm-active' : '' }}">
             <a href="{{ route('product') }}">

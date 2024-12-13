@@ -40,7 +40,7 @@ class OrderController extends Controller
     $order = Order::find($id);      
 
     $products = json_decode($order->order_detail, true);
-    return view('admin.order.show', compact('order', 'products', 'tanggal_awal'));
+    return view('admin.order.show', compact('order', 'products'));
   }
 
   // make update order

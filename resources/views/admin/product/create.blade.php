@@ -70,7 +70,7 @@
                             <div class="row mb-3">
                                 <label for="inputUkmName" class="col-sm-3 col-form-label">Harga Produk</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="inputUkmName" name="price" placeholder="Harga Produk" required>
+                                    <input type="number" class="form-control" id="inputUkmName" name="price" placeholder="Harga Produk" min="10000" max="100000000" required>
                                     <div class="invalid-feedback" id="price-error"></div>
                                 </div>
                             </div>

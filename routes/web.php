@@ -42,6 +42,7 @@ Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(fu
     })->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/umkm', [DashboardController::class, 'dashboardUMKM'])->name('dashboard.dashboardUMKM');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
