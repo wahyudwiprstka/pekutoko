@@ -13,4 +13,4 @@ Schedule::call(function () {
     Order::where('order_status', 0)
     ->where('created_at', '<', today()->subDay())
     ->update(['order_status' => 4]);
-})->hourly();  
+})->everyMinute();  
