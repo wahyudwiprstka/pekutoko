@@ -98,10 +98,10 @@ use App\Models\File;
           </table>
 
           @if ($order->order_status != 4 && $order->order_status != 3)
-          <form id="orderForm-{{ $order->id }}" action="{{ route('order.update', $order->id) }}" method="POST">
+          <form id="cancelForm-{{ $order->id }}" action="{{ route('order.update', $order->id) }}" method="POST">
             @csrf
             <input type="hidden" name="order_status" value="4">
-            <button type="button" class="btn btn-danger" onclick="updateOrder('{{ $order->id }}')">Lakukan Pembatalan</button>
+            <button type="submit" class="btn btn-danger" onclick="batalOrder('{{ $order->id }}')">Lakukan Pembatalan</button>
           </form>
           @endif
         </div>
@@ -130,6 +130,25 @@ use App\Models\File;
       if (result.isConfirmed) {
         // Submit the form programmatically
         document.getElementById('orderForm-' + orderId).submit();
+      }
+    });
+  }
+</script>
+<script>
+  function batalOrder(orderId) {
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yakin',
+      cancelButtonText: 'Tidak Yakin'
+    }).then((result) => {
+      // send to server
+      if (result.isConfirmed) {
+        // Submit the form programmatically
+        document.getElementById('cancelForm-' + orderId).submit();
       }
     });
   }
