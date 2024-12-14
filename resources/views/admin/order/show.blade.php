@@ -133,8 +133,7 @@ use App\Models\File;
       }
     });
   }
-</script>
-<script>
+
   function batalOrder(orderId) {
     Swal.fire({
       title: 'Apakah Anda yakin?',
@@ -152,5 +151,4 @@ use App\Models\File;
       }
     });
   }
-</script>
 @endpush
