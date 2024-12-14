@@ -101,7 +101,7 @@ use App\Models\File;
           <form id="cancelForm-{{ $order->id }}" action="{{ route('order.update', $order->id) }}" method="POST">
             @csrf
             <input type="hidden" name="order_status" value="4">
-            <button type="submit" class="btn btn-danger" onclick="batalOrder('{{ $order->id }}')">Lakukan Pembatalan</button>
+            <button type="button" class="btn btn-danger" onclick="batalOrder('{{ $order->id }}')">Lakukan Pembatalan</button>
           </form>
           @endif
         </div>
@@ -151,4 +151,5 @@ use App\Models\File;
       }
     });
   }
+  </script>
 @endpush
