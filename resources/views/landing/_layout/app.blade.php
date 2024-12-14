@@ -56,8 +56,8 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{ route('landing') }}">Home</a></li>
-                            <li><a href="{{ route('landing.umkm') }}">UMKM</a></li>
+                            <li class="{{ Request::routeIs(['landing']) ? 'active' : '' }}"><a href="{{ route('landing') }}">Home</a></li>
+                            <li class="{{ Request::routeIs(['landing.umkm']) ? 'active' : '' }}"><a href="{{ route('landing.umkm') }}">UMKM</a></li>
                         </ul>
                     </nav>
                 </div>
