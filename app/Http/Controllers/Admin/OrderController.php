@@ -32,7 +32,8 @@ class OrderController extends Controller
     }
 
     $tanggal_awal = $request['tanggal_awal'];
-    return view('admin.order.index', compact('orders', 'tanggal_awal'));
+    $tanggal_akhir = $request['tanggal_akhir'];
+    return view('admin.order.index', compact('orders', 'tanggal_awal', 'tanggal_akhir'));
   }
 
   public function show($id, Request $request)

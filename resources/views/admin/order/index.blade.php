@@ -24,11 +24,11 @@
           <form class="date__sort">
             <div>
                 <label for="tanggal_awal">Tanggal Awal:</label>
-                <input type="date" id="tanggal_awal" name="tanggal_awal" class="sort_tanggal" required/>
+                <input type="date" value={{$tanggal_awal}} id="tanggal_awal" name="tanggal_awal" class="sort_tanggal" />
               </div>
               <div>
                 <label for="tanggal_akhir">Tanggal Akhir:</label>
-                <input type="date" id="tanggal_akhir" name="tanggal_akhir" class="sort_tanggal" required/>
+                <input type="date" value={{$tanggal_akhir}} id="tanggal_akhir" name="tanggal_akhir" class="sort_tanggal"/>
               </div>
               <button type="submit" class="btn-primary">Submit</button>
             </form>
