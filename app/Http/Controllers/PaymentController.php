@@ -36,11 +36,19 @@ class PaymentController extends Controller
       }
 
       // Perbarui status semua transaksi yang ditemukan
-      foreach ($transactions as $transaction) {
-        $transaction->update([
-          'order_status' => 1,
-        ]);
+      if($request['status_code'] == 1){
+        foreach ($transactions as $transaction) {
+          $transaction->update([
+            'order_status' => 1,
+          ]);
+        }
       }
+
+      // foreach ($transactions as $transaction) {
+      //   $transaction->update([
+      //     'order_status' => 1,
+      //   ]);
+      // }
 
 
       // Kirim pesan WhatsApp ke setiap pelanggan

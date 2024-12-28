@@ -27,9 +27,11 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'password' => 'required',
+                'identity_number' => 'required',
             ], [
                 'name.required' => 'Kolom nama diperlukan.',
                 'password.required' => 'Kolom password diperlukan.',
+                'identity_number.required' => 'Kolom NIK diperlukan.',
             ]);
 
             if ($validator->fails()) {
@@ -39,7 +41,8 @@ class UserController extends Controller
             User::create([
                 'name' => $request->name,
                 'password' => bcrypt($request->password),
-                'role' => ["admin"],
+                'identity_number' => $request->identity_number,
+                'role' => '["admin"]',
             ]);
 
             return response()->json([
@@ -72,8 +75,9 @@ class UserController extends Controller
                 return response()->json(['errors' => $validator->errors()]);
             }
 
-            $user = User::find($request->id);
+            $user = User::where('identity_number', $request->first_identity_number)->first();
             $user->name = $request->name;
+            $user->identity_number = $request->identity_number;
             $user->status = $request->status;
             $user->save();
 

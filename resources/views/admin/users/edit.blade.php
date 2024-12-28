@@ -38,6 +38,9 @@
                                     <div class="invalid-feedback" id="identity_number-error"></div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <input type="text" class="form-control" id="inputIdentity" name="first_identity_number" placeholder="Masukkan No KTP" value="{{ $user->identity_number }}" hidden required>
+                            </div>
                             <div class="row mb-3">
                                 <label for="inputIdentity" class="col-sm-3 col-form-label">Status</label>
                                 <div class="col-sm-9">
@@ -79,10 +82,12 @@
             // Mengambil nilai form
             var formData = $(this).serialize();
 
+            console.log(formData);
+
             // Kirim data menggunakan AJAX
             $.ajax({
                 type: 'POST',
-                url: '/admin/usesr/update', // Ganti dengan URL tujuan pengiriman data
+                url: '/admin/users/update', // Ganti dengan URL tujuan pengiriman data
                 data: formData,
                 success: function(response) {
                     // Handle respon dari server
