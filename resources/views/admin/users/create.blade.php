@@ -102,6 +102,7 @@
                         // Tampilkan pesan error validasi
                         $('#name-error').text(errors.name ? errors.name[0] : '');
                         $('#identity_number-error').text(errors.identity_number ? errors.identity_number[0] : '');
+                        $('#createUserForm').removeClass('was-validated');
                         $('#password-error').text(errors.password ? errors.password[0] : '');
                     }
                 },

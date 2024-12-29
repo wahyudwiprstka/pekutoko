@@ -38,7 +38,7 @@ class AuthController extends Controller
                     return response()->json([
                         'code' => 200,
                         'status' => 'success',
-                        'url' => 'admin/product'
+                        'url' => 'admin/dashboard/umkm'
                     ]);
                 } else {
                     return response()->json([

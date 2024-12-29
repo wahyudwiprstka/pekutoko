@@ -27,11 +27,12 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'password' => 'required',
-                'identity_number' => 'required',
+                'identity_number' => 'required|unique:users',
             ], [
                 'name.required' => 'Kolom nama diperlukan.',
                 'password.required' => 'Kolom password diperlukan.',
                 'identity_number.required' => 'Kolom NIK diperlukan.',
+                'identity_number.unique' => 'NIK telah digunakan.'
             ]);
 
             if ($validator->fails()) {
