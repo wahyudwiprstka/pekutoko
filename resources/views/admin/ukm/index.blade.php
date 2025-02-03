@@ -50,7 +50,7 @@
                                     </a>
                                 </td>
                                 <td>{{ $list->ukm_name }}</td>
-                                <td>{{ $list->user->name }}</td>
+                                {{-- <td>{{ $list->user->name }}</td> --}}
                                 <td>{{ $list->wa_pic }}</td>
                                 @if($list->ukm_status == 1)
                                 <td>Aktif</td>
