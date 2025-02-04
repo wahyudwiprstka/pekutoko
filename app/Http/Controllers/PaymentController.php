@@ -52,7 +52,9 @@ class PaymentController extends Controller
 
 
       // Kirim pesan WhatsApp ke setiap pelanggan
-      $this->whatsappService->sendMessage($transactions[0]->phone_number, "Pembayaran dengan nomor order " . $transactions[0]->order_number . " berhasil, penjual akan mengirim produknya." );
+      if($request['status_code'] == 1){
+        $this->whatsappService->sendMessage($transactions[0]->phone_number, "Pembayaran dengan nomor order " . $transactions[0]->order_number . " berhasil, penjual akan mengirim produknya." );
+      }
       
       // Kirim respon sukses
       return response()->json([
