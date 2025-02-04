@@ -41,7 +41,7 @@
                                     <a href="{{ route('category.edit', [$list->id]) }}">
                                         <button type="button" class="btn btn-primary btn-sm">Edit</button>
                                     </a>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{$list->id}}')">Hapus</button>
+                                    {{-- <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{$list->id}}')">Hapus</button> --}}
                                 </td>
                                 <td>{{ $list->category_name }}</td>
                             </tr>
