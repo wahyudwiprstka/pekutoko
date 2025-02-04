@@ -44,7 +44,7 @@
                                     <a href="{{ route('ukm.edit', [$list->id]) }}">
                                         <button type="button" class="btn btn-primary btn-sm">Edit</button>
                                     </a>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{$list->id}}')">Hapus</button>
+                                    {{-- <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{$list->id}}')">Hapus</button> --}}
                                     <a href="{{ route('export.pdf', [$list->id]) }}">
                                         <button type="button" class="btn btn-danger btn-sm">PDF</button>
                                     </a>

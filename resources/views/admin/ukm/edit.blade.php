@@ -6,13 +6,13 @@
 <div class="page-wrapper">
     <div class="page-content">
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">UKM</div>
+            <div class="breadcrumb-title pe-3">UMKM</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit UKM</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit UMKM</li>
                     </ol>
                 </nav>
             </div>
@@ -22,12 +22,12 @@
             <div class="col-xl-8 mx-auto">
                 <div class="card">
                     <div class="card-body p-4">
-                        <h5 class="mb-4">Form Edit UKM</h5>
+                        <h5 class="mb-4">Form Edit UMKM</h5>
                         <form class="needs-validation" id="updateUkmForm" novalidate>
                             <input type="hidden" class="form-control" value="{{ $ukm->id }}" name="id_ukm">
                             <input type="hidden" class="form-control" value="{{ $ukm->user->id }}" name="id_user">
                             <div class="row mb-3">
-                                <label for="inputUkmName" class="col-sm-3 col-form-label">Nama Pemilik UKM</label>
+                                <label for="inputUkmName" class="col-sm-3 col-form-label">Nama Pemilik UMKM</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="inputUkmName" value="{{ $ukm->user->name }}" name="name" placeholder="Masukkan Nama Pemilik UKM" required>
                                     <div class="invalid-feedback" id="name-error"></div>
@@ -41,21 +41,21 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputUkmName" class="col-sm-3 col-form-label">Nama UKM</label>
+                                <label for="inputUkmName" class="col-sm-3 col-form-label">Nama UMKM</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="inputUkmName" value="{{ $ukm->ukm_name }}" name="ukm_name" placeholder="Masukkan Nama UKM" required>
                                     <div class="invalid-feedback" id="ukm_name-error"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputUkmAddress" class="col-sm-3 col-form-label">Alamat UKM</label>
+                                <label for="inputUkmAddress" class="col-sm-3 col-form-label">Alamat UMKM</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="inputUkmAddress" value="{{ $ukm->ukm_address }}" name="ukm_address" placeholder="Masukkan Alamat UKM" required>
                                     <div class="invalid-feedback" id="ukm_address-error"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputWaPic" class="col-sm-3 col-form-label">Nomor WA UKM</label>
+                                <label for="inputWaPic" class="col-sm-3 col-form-label">Nomor WA UMKM</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="inputWaPic" value="{{ $ukm->wa_pic }}" name="wa_pic" placeholder="Masukkan Nomor WA UKM" required>
                                     <div class="invalid-feedback" id="wa_pic-error"></div>
