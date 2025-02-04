@@ -28,6 +28,8 @@ Route::get('/remove-cart', [LandingController::class, 'removeCart'])->name('land
 Route::get('/remove-cart/{id}', [LandingController::class, 'removeCartProduct'])->name('landing.remove-cart-product');
 Route::post('/process-checkout', [LandingController::class, 'processCheckout'])->name('landing.process-checkout');
 Route::get('/cara-pembelian', [LandingController::class, 'caraPembelian'])->name('landing.caraPembelian');
+Route::get('/order/search', [LandingController::class, 'orderSearch'])->name('landing.order.show');
+Route::get('/order', [LandingController::class, 'order'])->name('landing.order');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');

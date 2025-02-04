@@ -34,9 +34,16 @@
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-10">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-1">
+                        <div class="header__top__right text-white">
+                            <div class="header__top__right__auth">
+                                <a href="{{route('landing.order')}}"><i class="fa-solid fa-bag-shopping"></i>Order</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
                         <div class="header__top__right">
                             <div class="header__top__right__auth">
                                 <a href="{{route('login')}}"><i class="fa fa-user"></i> Login</a>

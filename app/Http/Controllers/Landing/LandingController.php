@@ -156,6 +156,26 @@ class LandingController extends Controller
         return view('landing.checkout', compact('products', 'categories', 'totalPrice'));
     }
 
+    function order(): mixed {
+        return view('landing.order');
+    }
+
+    function orderSearch(Request $request): mixed {
+        $orderNumber = $request->input('order_number');
+        $phoneNumber = $request->input('phonenumber');
+        $orders = Order::where('order_number', $orderNumber)->where('phone_number', $phoneNumber)->get();
+        if($orders == null){
+            $notfound = "Order not found";
+            return view('landing.order', compact('notfound'));
+        }      
+        // $products = json_decode($orders->order_detail, true);
+        $products[] = [];
+        foreach($orders as $order) {
+            array_push($products, json_decode($order->order_detail, true));
+        }
+        return view('landing.showOrder', compact('orders', 'products'));
+    }
+
     function processCheckout(Request $request): mixed
     {
         DB::beginTransaction();

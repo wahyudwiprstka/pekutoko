@@ -53,13 +53,13 @@ class OrderController extends Controller
 
     switch ($request->order_status) {
       case 2:
-        $message = "Pesanan dengan nomor order " . $order->id . " telah dikirim";
+        $message = "Pesanan dengan nomor order " . $order->order_number . " telah dikirim";
         break;
       case 3:
-        $message = "Pesanan dengan nomor order " . $order->id . " telah selesai";
+        $message = "Pesanan dengan nomor order " . $order->order_number . " telah selesai";
         break;
       default:
-        $message = "Pesanan dengan nomor order " . $order->id . " telah dibatalkan";
+        $message = "Pesanan dengan nomor order " . $order->order_number . " telah dibatalkan";
         break;
     }
 
