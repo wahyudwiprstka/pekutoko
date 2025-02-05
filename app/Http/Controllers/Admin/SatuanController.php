@@ -93,7 +93,7 @@ class SatuanController extends Controller
                 return response()->json(['errors' => $validator->errors()]);
             }
 
-            $satuan = Category::find($request->id);
+            $satuan = Satuan::find($request->id);
             if (!$satuan) {
                 return response()->json([
                     'code' => 404,
