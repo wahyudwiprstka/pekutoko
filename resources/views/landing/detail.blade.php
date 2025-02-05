@@ -64,7 +64,7 @@ use App\Models\File;
                     <h3>{{ $product->product_name }}</h3>
                     <a href={{request()->root() . "/umkm/" . $product->ukm->id}}><h5>{{ $product->ukm->ukm_name }}</h5></a>
                     <div class="product__details__price">{{ 'Rp ' . number_format($product->price, 0, ',', '.') }}</div>
-                    <p>{{ $product->description }}</p>
+                    <p>{!! nl2br($product->description, false) !!}</p>
                     <form action="{{ route('landing.add-to-cart', ['id' => $product->id]) }}" method="POST">
                         @csrf
                         <div class="product__details__quantity">
